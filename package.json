@@ -1,0 +1,17 @@
+{
+  "name": "score_bot",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "nodemon bot.js"
+  },
+  "main": "bot.js",
+  "author": "João Coelho",
+  "dependencies": {
+    "discord": "^0.8.2",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
