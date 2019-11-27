@@ -6,9 +6,10 @@ const client = new Discord.Client();
 
 function getRandomDate() {
   const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1;
-  const day = now.getDate() + 1;
+  const year = now.getUTCFullYear();
+  const month = now.getUTCMonth() + 1;
+
+  const day = now.getUTCHours() < parseInt(process.env.MORDE_START_HOUR, 10) ? now.getUTCDate() : now.getUTCDate() + 1;
 
   const startDate = new Date(`${year}-${month}-${day}T${process.env.MORDE_START_HOUR}`);
   const endDate = new Date(`${year}-${month}-${day}T${process.env.MORDE_END_HOUR}`);

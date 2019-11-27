@@ -22,6 +22,20 @@ module.exports = function (morde, getRandomDate) { // eslint-disable-line func-n
     switch (champion) {
       case MORDE:
         if (command === TOGGLE_COMMAND) { // toggle timeout on or off
+          const roles = [...msg.member.roles.keys()]; // user roles in server
+          const allowedToggleRoles = JSON.parse(process.env.ALLOWED_MORDE_TOGGLE_ROLES); // allowed roles in server
+
+          // check if user is authorized to toggle
+          let authorized = false;
+          for (let i = 0; i < allowedToggleRoles.length; i += 1) {
+            if (roles.find((role) => role === allowedToggleRoles[i]) !== undefined) {
+              authorized = true;
+              break;
+            }
+          }
+
+          if (!authorized) return;
+
           if (global.mordeTimeout === null) {
             global.mordeTimeout = setTimeout(() => morde.realmOfDeath(), getRandomDate() - (new Date()).getTime());
             msg.channel.send(MORDE_TOGGLE_ON);
