@@ -18,43 +18,18 @@ function getRandomDate() {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const morde = require('./morde')(client, getRandomDate);
+const morde = require('./champions/morde')(client, getRandomDate);
+const msgHandler = require('./msgHandler')(morde, getRandomDate);
 
 global.mordeTimeout = null;
 
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}`);
-});
+client.on('ready', () => console.log(`Logged in as ${client.user.tag}`));
 
-client.on('error', (err) => {
-  console.error(err);
-});
+client.on('error', (err) => console.error(err));
 
-client.on('message', (msg) => {
-  if (msg.channel.id !== process.env.MSG_CHANNEL_ID) {
-    return;
-  }
+client.on('message', (msg) => msgHandler.handler(msg));
 
-  if (msg.content === '!morde toggle' && msg.member.user.id === process.env.USER_ID) {
-    if (global.mordeTimeout === null) {
-      global.mordeTimeout = setTimeout(() => morde.realmOfDeath(), getRandomDate() - (new Date()).getTime());
-      msg.channel.send('The order is given!');
-    } else {
-      clearInterval(global.mordeTimeout);
-      global.mordeTimeout = null;
-      msg.channel.send('I return to my slumber once more...');
-    }
-  }
-
-  if (msg.content === '!morde status' && msg.member.user.id === process.env.USER_ID) {
-    if (global.mordeTimeout === null) {
-      msg.channel.send('The lord of Death rests...');
-    } else {
-      msg.channel.send('Desolation is coming!');
-    }
-  }
-});
-
+// Set timeout for Mordekaiser on bot start
 global.mordeTimeout = setTimeout(() => morde.realmOfDeath(), getRandomDate() - (new Date()).getTime());
 
 client.login(process.env.DISCORD_TOKEN);
