@@ -3,16 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "nodemon bot.js"
+    "start": "nodemon bot.js",
+    "lint": "eslint ."
   },
   "main": "bot.js",
   "author": "João Coelho",
   "dependencies": {
-    "discord": "^0.8.2",
+    "@discordjs/uws": "^10.149.0",
     "discord.js": "^11.5.1",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "node-opus": "^0.3.3"
   },
   "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
     "nodemon": "^2.0.1"
   }
 }
