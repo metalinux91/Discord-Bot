@@ -20,7 +20,12 @@ module.exports = function (client, getRandomDate) { // eslint-disable-line func-
       }
     });
 
-    if (mostFilledChannel === undefined) return; // if there are no connected users, do nothing
+    // if there are no connected users, do nothing
+    if (mostFilledChannel === undefined) {
+      global.mordeTimeout = setTimeout(() => realmOfDeath(), getRandomDate() - (new Date()).getTime());
+      return;
+    }
+
     mostFilledChannel = server.channels.get(mostFilledChannel);
 
     // If Pires is connected to the most filled channel, choose him. Otherwise, get a random member
