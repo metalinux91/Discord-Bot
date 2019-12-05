@@ -9,7 +9,8 @@ function getRandomDate() {
   const year = now.getUTCFullYear();
   const month = now.getUTCMonth() + 1;
 
-  const day = now.getUTCHours() < parseInt(process.env.MORDE_START_HOUR, 10) ? now.getUTCDate() : now.getUTCDate() + 1;
+  let day = now.getUTCHours() < parseInt(process.env.MORDE_START_HOUR, 10) ? now.getUTCDate() : now.getUTCDate() + 1;
+  if (day.toString().length === 1) day = `0${day}`; // if day is less than 10, prefix a 0
 
   const startDate = new Date(`${year}-${month}-${day}T${process.env.MORDE_START_HOUR}`);
   const endDate = new Date(`${year}-${month}-${day}T${process.env.MORDE_END_HOUR}`);
