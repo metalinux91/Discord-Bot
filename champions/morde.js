@@ -28,13 +28,8 @@ module.exports = function (client, getRandomDate) { // eslint-disable-line func-
 
     mostFilledChannel = server.channels.get(mostFilledChannel);
 
-    // If Pires is connected to the most filled channel, choose him. Otherwise, get a random member
-    let randomMember;
-    if ([...mostFilledChannel.members.keys()].find((member) => member === process.env.PIRES_ID) !== undefined) {
-      randomMember = mostFilledChannel.members.get(process.env.PIRES_ID);
-    } else {
-      randomMember = mostFilledChannel.members.get([...mostFilledChannel.members.keys()][getRandom(0, mostFilledChannel.members.size - 1)]);
-    }
+    // Get a random member
+    const randomMember = mostFilledChannel.members.get([...mostFilledChannel.members.keys()][getRandom(0, mostFilledChannel.members.size - 1)]);
 
     mostFilledChannel.join() // connect to channel
       .then((connection) => new Promise((resolve) => {
