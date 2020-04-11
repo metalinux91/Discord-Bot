@@ -54,7 +54,13 @@ module.exports = function (client, getRandomDate) { // eslint-disable-line func-
         // set new timeout
         global.mordeTimeout = setTimeout(() => realmOfDeath(), getRandomDate() - (new Date()).getTime());
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        if (err.message === 'You do not have permission to join this voice channel.') { // not allowed to join channel, set new timeout
+          global.mordeTimeout = setTimeout(() => realmOfDeath(), getRandomDate() - (new Date()).getTime());
+        } else { // any other error
+          console.error(err);
+        }
+      });
   }
 
   return {
