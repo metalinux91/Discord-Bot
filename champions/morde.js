@@ -29,7 +29,8 @@ module.exports = function (client, getRandomDate) { // eslint-disable-line func-
     mostFilledChannel = server.channels.get(mostFilledChannel);
 
     // Get a random member
-    const randomMember = mostFilledChannel.members.get([...mostFilledChannel.members.keys()][getRandom(0, mostFilledChannel.members.size - 1)]);
+    // Turn map of members to array, filter out bots, get random index
+    const randomMember = ([...mostFilledChannel.members.values()].filter((e) => !e.user.bot))[getRandom(0, mostFilledChannel.members.size - 1)];
 
     mostFilledChannel.join() // connect to channel
       .then((connection) => new Promise((resolve) => {
