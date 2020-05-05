@@ -13,7 +13,7 @@ function getRandomDate() {
   let month = now.month() + 1;
   if (month.toString().length === 1) month = `0${month}`; // if day is less than 10, prefix 0
 
-  let day = now.hour() < parseInt(process.env.MORDE_START_HOUR, 10) ? now.date() : now.date() + 1;
+  let day = now.hour() < parseInt(process.env.MORDE_START_HOUR.split(':')[0], 10) ? now.date() : now.date() + 1;
   if (day.toString().length === 1) day = `0${day}`; // if day is less than 10, prefix a 0
 
   const startDate = moment.tz(`${year}-${month}-${day}T${process.env.MORDE_START_HOUR}`, process.env.SERVER_TIMEZONE);
@@ -34,7 +34,8 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
 
   // Set timeout for Mordekaiser on bot start
-  global.mordeTimeout = setTimeout(() => morde.realmOfDeath(), getRandomDate() - (new Date()).getTime());
+  // global.mordeTimeout = setTimeout(() => morde.realmOfDeath(), getRandomDate() - (new Date()).getTime());
+  global.mordeTimeout = setTimeout(() => morde.realmOfDeath(), 5000);
 });
 
 client.on('error', (err) => console.error(err));
