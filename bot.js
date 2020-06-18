@@ -34,8 +34,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
 
   // Set timeout for Mordekaiser on bot start
-  // global.mordeTimeout = setTimeout(() => morde.realmOfDeath(), getRandomDate() - (new Date()).getTime());
-  global.mordeTimeout = setTimeout(() => morde.realmOfDeath(), 5000);
+  global.mordeTimeout = setTimeout(() => morde.realmOfDeath(), getRandomDate() - (new Date()).getTime());
 });
 
 client.on('error', (err) => console.error(err));
