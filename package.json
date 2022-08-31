@@ -13,7 +13,7 @@
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.28",
+    "moment-timezone": "^0.5.35",
     "node-opus": "^0.3.3"
   },
   "devDependencies": {
